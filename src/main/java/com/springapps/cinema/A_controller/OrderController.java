@@ -25,7 +25,7 @@ public class OrderController {
     }
 
     @PostMapping
-    public ResponseEntity<Order> addMovie(@RequestBody OrderRequestDTO orderRequestDTO){
+    public ResponseEntity<Order> addOrder(@RequestBody OrderRequestDTO orderRequestDTO){
         try {
             return ResponseEntity.ok(orderService.addOrder(orderRequestDTO));
         } catch (MessagingException e) {

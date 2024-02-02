@@ -1,5 +1,7 @@
 package com.springapps.cinema.E_DTO;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 public class OrderRequestDTO {
@@ -7,7 +9,7 @@ public class OrderRequestDTO {
     private Long projectionID;
 
     private Long userId;
-
+    @JsonProperty("seats")
     private List<TicketRequestDTO> ticketRequestDTOs;
 
     public OrderRequestDTO(Long projectionID, List<TicketRequestDTO> ticketRequestDTOs, Long userId) {

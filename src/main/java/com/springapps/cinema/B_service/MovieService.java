@@ -34,7 +34,7 @@ public class MovieService {
         CinemaRoom cinemaRoom = cinemaRoomRepository.findById(movieRequestDTO.getCinemaRoomId()).orElseThrow(() -> new RuntimeException("cinema room not found"));
         Movie movie = new Movie();
         movie.setTitle(movieRequestDTO.getTitle());
-        movie.setMoviePrice(movie.getMoviePrice());
+        movie.setMoviePrice(movieRequestDTO.getPrice());
         movie.setProjections(generateMovieProjections(movieRequestDTO.getProjectionRequestDTOs(),movie, cinemaRoom));
         return movieRepository.save(movie);
     }

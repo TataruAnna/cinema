@@ -1,5 +1,7 @@
 package com.springapps.cinema.E_DTO;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.*;
 
 public class MovieRequestDTO {
@@ -9,6 +11,7 @@ public class MovieRequestDTO {
 
     private Double price;
 
+    @JsonProperty("dates")
     List<ProjectionRequestDTO> projectionRequestDTOs;
 
     public MovieRequestDTO(String title, Long cinemaRoomId, List<ProjectionRequestDTO> projectionRequestDTOs, Double price) {

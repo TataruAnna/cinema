@@ -30,12 +30,16 @@ public class OrderService {
     private TicketService ticketService;
 
     private EmailService emailService;
-
     @Autowired
-    public OrderService(OrderRepository orderRepository) {
+    public OrderService(OrderRepository orderRepository, UserRepository userRepository, PdfGenerationService pdfGenerationService, ProjectionRepository projectionRepository, SeatRepository seatRepository, TicketService ticketService, EmailService emailService) {
         this.orderRepository = orderRepository;
+        this.userRepository = userRepository;
+        this.pdfGenerationService = pdfGenerationService;
+        this.projectionRepository = projectionRepository;
+        this.seatRepository = seatRepository;
+        this.ticketService = ticketService;
+        this.emailService = emailService;
     }
-
 
     @Transactional
     public Order addOrder (OrderRequestDTO orderRequestDTO) throws MessagingException {
@@ -49,8 +53,8 @@ public class OrderService {
         order.setTickets(generateOrderTicktes(order, projection, orderRequestDTO.getTicketRequestDTOs()));
         order.setTotalPrice(computeTotalPrice(order.getTickets()));
         Order savedOrder =  orderRepository.save(order);
-        //pdfGenerationService.generatePdf("ai cumparat bilet la filmul "+ projection.getMovie().getTitle(), "src/main/resources/generated/order.pdf");
-        //emailService.sendMessageWithAttachment(user.getName(),"sdfdsf", "dsfdsf", "src/main/resources/generated/order.pdf");
+        pdfGenerationService.generatePdf("ai cumparat bilet la filmul "+ projection.getMovie().getTitle(), "src/main/resources/order.pdf");
+        emailService.sendMessageWithAttachment(user.getName(),"sdfdsf", "dsfdsf", "src/main/resources/order.pdf");
         return savedOrder;
 
 
